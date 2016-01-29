@@ -45,7 +45,8 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x0008000 --ramdisk_offset 0x2000000
-TARGET_KERNEL_SOURCE := kernel/lge/g3
+TARGET_KERNEL_SOURCE := device/lge/d855-kernel
+$(shell mkdir -p out/target/product/d855/kernel)
 
 ifeq ($(filter d852, $(TARGET_DEVICE)),)
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
@@ -55,7 +56,9 @@ endif
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 USE_CUSTOM_AUDIO_POLICY := 1
-
+$(shell mkdir -p out/target/product/d855/obj/SHARED_LIBRARIES/libaudiopolicymanager_intermediates/export_includes)
+$(shell mkdir -p out/target/product/d855/obj/lib/)
+$(shell cp ~/Documents/aosp_files/libaudiopolicymanager.so out/target/product/d855/obj/lib/)
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 
@@ -76,7 +79,8 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap_to_wake"
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-
+$(shell mkdir -p out/target/product/d855/obj/SHARED_LIBRARIES/libcryptfs_hw_intermediates/export_includes)
+$(shell cp ~/Documents/aosp_files/libcryptfs_hw.so out/target/product/d855/obj/lib/)
 # Display
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
